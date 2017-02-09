@@ -1,20 +1,32 @@
 ﻿using PinBoard.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PinBoard.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private string windowTitle = "PinBoard";
+        private bool isProjectOpen;
+        private DataRepository dataRepository;
 
 
+        public string WindowTitle
+        {
+            get { return windowTitle; }
+            set { windowTitle = value; OnPropertyChanged("WindowTitle"); }
+        }
 
-
-
-
+        public bool IsProjectOpen
+        {
+            get { return isProjectOpen; }
+            set { isProjectOpen = value; OnPropertyChanged("IsProjectOpen"); }
+        }
 
         #region Commands
 
@@ -77,7 +89,7 @@ namespace PinBoard.ViewModels
 
         private void OnMainMenuNewClickHandler(object parameter)
         {
-
+            
         }
 
         private void OnMainMenuOpenClickHandler(object parameter)
@@ -95,5 +107,14 @@ namespace PinBoard.ViewModels
 
         }
         #endregion Command Handlers
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
