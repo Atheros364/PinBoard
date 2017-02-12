@@ -12,7 +12,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Content="test" Command="{Binding OnMainMenuNewClick}" />
@@ -25,17 +26,17 @@
                     <MenuItem Header="_Exit" Command="{Binding OnMainMenuExitClick}"/>
                 </MenuItem>
             </Menu>
-            <StackPanel></StackPanel>
         </DockPanel>
-        <Grid Grid.Row="1">
+        <Rectangle Grid.Row="1" Fill="DarkGray"/>
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" MinWidth="250"/>
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
-            <local:SideBarView Grid.Column="0" />
+            <local:SideBarView Grid.Column="0" DataContext="{Binding SideBarViewModel}"/>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-            <local:CanvasView Grid.Column="2" />
+            <local:CanvasView Grid.Column="2"/>
         </Grid>
     </Grid>
 </Window>

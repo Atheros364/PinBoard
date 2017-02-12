@@ -14,6 +14,7 @@ namespace PinBoard.ViewModels
         private string windowTitle = "PinBoard";
         private bool isProjectOpen;
         private DataRepository dataRepository;
+        private SideBarViewModel sideBarViewModel;
 
 
         public string WindowTitle
@@ -26,6 +27,35 @@ namespace PinBoard.ViewModels
         {
             get { return isProjectOpen; }
             set { isProjectOpen = value; OnPropertyChanged("IsProjectOpen"); }
+        }
+
+        public SideBarViewModel SideBarViewModel
+        {
+            get { return sideBarViewModel; }
+            set { sideBarViewModel = value; OnPropertyChanged("SideBarViewModel"); }
+        }
+
+        public bool IsProjectDirty
+        {
+            get
+            {
+                if (dataRepository != null)
+                {
+                    return dataRepository.IsDirty;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public void InitializeMainWindow()
+        {
+            //add in a open last here, also add in code to launch from file
+            SideBarViewModel = new SideBarViewModel();
+            SideBarViewModel.InitilizeSideBar(dataRepository);
+            //add in initialize canvas view model
         }
 
         #region Commands
@@ -89,7 +119,8 @@ namespace PinBoard.ViewModels
 
         private void OnMainMenuNewClickHandler(object parameter)
         {
-            
+            dataRepository = new DataRepository();
+            InitializeMainWindow();
         }
 
         private void OnMainMenuOpenClickHandler(object parameter)
