@@ -13,7 +13,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Name}" Grid.Row="0"/>
+                <TextBlock Text="{Binding Name}" Grid.Row="0" FontWeight="Bold"/>
                 <TextBlock Text="{Binding Description}" Grid.Row="1"/>
             </Grid>
         </DataTemplate>
@@ -33,29 +33,27 @@
         
         <Rectangle Fill="AliceBlue" Grid.RowSpan="2"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="+" Margin="5,5,0,5" Width="15"/>
-            <Button Content="-" Margin="5,5,0,5" Width="15"/>
+            <Button Content="+" Command="{Binding OnAddClick}" Margin="5,5,0,5" Width="15"/>
+            <Button Content="-" Command="{Binding OnRemoveClick}" IsEnabled="{Binding IsRemoveButtonEnabled}" Margin="5,5,0,5" Width="15"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <ComboBox MinWidth="75" ItemsSource="{Binding TagList}" Margin="5,5,0,5" Text="Tags" SelectedItem="{Binding SelectedTag}">
+            <ComboBox MinWidth="75" ItemsSource="{Binding TagList , UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,5" Text="Tags" SelectedItem="{Binding SelectedTag}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <TextBox Text="{Binding Name}"/>
+                            <TextBox Text="{Binding Name , UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Width="70" Margin="5,5,0,5" Text="{Binding SearchText}"/>
-            <Button Content="Search" Margin="5" Command="{Binding onSearchClick}"/>
+            <TextBox Width="70" Margin="5,5,0,5" Text="{Binding SearchText , UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search" Margin="5" Command="{Binding OnSearchClick}"/>
         </StackPanel>
 
-        <ListBox Grid.Row="2" ItemsSource="{Binding BlurbSideBarList}">
+        <ListBox Grid.Row="2" ItemsSource="{Binding BlurbSideBarList , UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBlurb}" MouseDoubleClick="ListBox_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate x:Name="BlurbTemplate">
-                    <Grid>
-                        <Expander HeaderTemplate="{StaticResource BlurbHeaderTemplate}" ContentTemplate="{StaticResource BlurbContentTemplate}"/>
-                    </Grid>
+                    <Expander HeaderTemplate="{StaticResource BlurbHeaderTemplate}" ContentTemplate="{StaticResource BlurbContentTemplate}" Header="{Binding}" Content="{Binding}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

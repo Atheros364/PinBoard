@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PinBoard.Models.DataTypes
 {
+    [Serializable]
     public class Blurb
     {
         public int Id { get; set; }
@@ -15,5 +16,16 @@ namespace PinBoard.Models.DataTypes
         public List<Attachment> Attachments { get; set; }
         public List<Tag> Tags { get; set; }
         public string Color { get; set; }
+
+        public Blurb()
+        {
+            Id = 0;
+            Name = "";
+            Description = "";
+            Body = "";
+            Attachments = new List<Attachment>();
+            Tags = new List<Tag>();
+            Color = "#D3D3D3";
+        }
     }
 }

@@ -23,6 +23,7 @@
                     <MenuItem Header="_New" Command="{Binding OnMainMenuNewClick}"/>
                     <MenuItem Header="_Open" Command="{Binding OnMainMenuOpenClick}"/>
                     <MenuItem Header="_Save" Command="{Binding OnMainMenuSaveClick}"/>
+                    <MenuItem Header="_Save As" Command="{Binding OnMainMenuSaveAsClick}"/>
                     <MenuItem Header="_Exit" Command="{Binding OnMainMenuExitClick}"/>
                 </MenuItem>
             </Menu>
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
-            <local:SideBarView Grid.Column="0" DataContext="{Binding SideBarViewModel}"/>
+            <local:SideBarView Grid.Column="0" DataContext="{Binding SideBarViewModel, UpdateSourceTrigger=PropertyChanged}"/>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <local:CanvasView Grid.Column="2"/>
         </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PinBoard.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace PinBoard.Views
         public SideBarView()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SideBarViewModel vm = DataContext as SideBarViewModel;
+
+            if (vm != null)
+            {
+                vm.OnEditClick.Execute(null);
+            }
         }
     }
 }

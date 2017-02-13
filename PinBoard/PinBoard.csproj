@@ -60,9 +60,11 @@
     <Compile Include="Models\DataTypes\Blurb.cs" />
     <Compile Include="Models\DataTypes\Canvas.cs" />
     <Compile Include="Models\DataTypes\CanvasObject.cs" />
+    <Compile Include="Models\DataTypes\RepositorySaveObject.cs" />
     <Compile Include="Models\DataTypes\Tag.cs" />
     <Compile Include="Models\Enums\CanvasObjectTypes.cs" />
     <Compile Include="Models\RelayCommand.cs" />
+    <Compile Include="ViewModels\BlurbEditWindowViewModel.cs" />
     <Compile Include="ViewModels\SideBarViewModel.cs" />
     <Compile Include="Views\BlurbEditWindow.xaml.cs">
       <DependentUpon>BlurbEditWindow.xaml</DependentUpon>

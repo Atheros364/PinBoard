@@ -27,11 +27,16 @@ namespace PinBoard
             InitializeComponent();
             DataContext = new MainWindowViewModel();
             viewModel = DataContext as MainWindowViewModel;
+            viewModel.InitializeMainWindow();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            e.Cancel = true;
+            if (viewModel != null)
+            {
+                viewModel.OnMainMenuExitClick.Execute(null);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Windows;
 
 namespace PinBoard.Models.DataTypes
 {
+    [Serializable]
     public class CanvasObject
     {
         public int Id { get; set; }
@@ -18,5 +19,10 @@ namespace PinBoard.Models.DataTypes
         public Blurb Blurb { get; set; }
         public string Color { get; set; }
         public bool IsFilled { get; set; }
+
+        public CanvasObject()
+        {
+            Id = 0;
+        }
     }
 }

@@ -19,6 +19,6 @@ namespace PinBoard
             mainWindow = new PinBoardMainWindow();
             mainWindow.Show();
             mainWindow.Activate();
-        } 
+        }
     }
 }
