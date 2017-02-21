@@ -15,7 +15,7 @@ namespace PinBoard.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private string windowTitle = "PinBoard";
-        private bool isProjectOpen;
+        private bool closing;
         private DataRepository dataRepository = new DataRepository();
         private SideBarViewModel sideBarViewModel = new SideBarViewModel();
         private string currentSavePath;
@@ -162,24 +162,28 @@ namespace PinBoard.ViewModels
 
         private void OnMainMenuExitClickHandler(object parameter)
         {
-            bool close = true;
-            if (dataRepository.IsDirty)
+            if (!closing)
             {
-                MessageBoxResult result = MessageBox.Show("You have unsaved changes, would you like to save?", "PinBoard", MessageBoxButton.YesNoCancel);
-                switch (result)
+                closing = true;
+                if (dataRepository.IsDirty)
                 {
-                    case MessageBoxResult.Yes:
-                        OnMainMenuSaveClickHandler(null);
-                        break;
-                    case MessageBoxResult.No:
-                        break;
-                    case MessageBoxResult.Cancel:
-                        close = false;
-                        break;
+                    MessageBoxResult result = MessageBox.Show("You have unsaved changes, would you like to save?", "PinBoard", MessageBoxButton.YesNoCancel);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            OnMainMenuSaveClickHandler(null);
+                            break;
+                        case MessageBoxResult.No:
+                            break;
+                        case MessageBoxResult.Cancel:
+                            closing = false;
+                            break;
+                    }
                 }
             }
 
-            if (close)
+
+            if (closing)
             {
                 Application.Current.Shutdown();
             }

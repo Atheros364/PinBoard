@@ -17,6 +17,7 @@ namespace PinBoard.ViewModels
         private Blurb currentBlurb;
         private string tagListString = "...";
         private DataRepository dataRepository;
+        private int tagListSize = 20;
 
         public string Name
         {
@@ -54,6 +55,7 @@ namespace PinBoard.ViewModels
         {
             this.dataRepository = dataRepository;
             currentBlurb = blurb;
+            UpdateTagList();
         }
 
 
@@ -61,6 +63,7 @@ namespace PinBoard.ViewModels
 
 
         private RelayCommand onCloseClick;
+        private RelayCommand onOpenTagSelectionClick;
 
         public RelayCommand OnCloseClick
         {
@@ -71,6 +74,18 @@ namespace PinBoard.ViewModels
                     onCloseClick = new RelayCommand(OnCloseClickHandler);
                 }
                 return onCloseClick;
+            }
+        }
+
+        public RelayCommand OnOpenTagSelectionClick
+        {
+            get
+            {
+                if (onOpenTagSelectionClick == null)
+                {
+                    onOpenTagSelectionClick = new RelayCommand(OnOpenTagSelectionClickHandler);
+                }
+                return onOpenTagSelectionClick;
             }
         }
 
@@ -87,6 +102,33 @@ namespace PinBoard.ViewModels
             {
                 window.Close();
             }
+        }
+
+        private void OnOpenTagSelectionClickHandler(object obj)
+        {
+            TagSelectionWindow window = new TagSelectionWindow();
+            window.DataContext = new TagSelectionWindowViewModel(dataRepository, currentBlurb);
+            window.ShowDialog();
+            UpdateTagList();
+        }
+
+        private void UpdateTagList()
+        {
+            string tagList = string.Empty;
+            foreach (Tag tag in currentBlurb.Tags)
+            {
+                if (tagList.Length + tag.Name.Length < tagListSize)
+                {
+                    tagList += tag.Name + ",";
+                }
+                else
+                {
+                    tagList += "...";
+                }
+
+            }
+            tagList = tagList.TrimEnd(',');
+            TagListString = tagList;
         }
 
         protected void OnPropertyChanged(string name)

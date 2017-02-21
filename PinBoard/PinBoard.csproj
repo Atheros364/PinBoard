@@ -66,6 +66,7 @@
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="ViewModels\BlurbEditWindowViewModel.cs" />
     <Compile Include="ViewModels\SideBarViewModel.cs" />
+    <Compile Include="ViewModels\TagSelectionWindowViewModel.cs" />
     <Compile Include="Views\BlurbEditWindow.xaml.cs">
       <DependentUpon>BlurbEditWindow.xaml</DependentUpon>
     </Compile>
@@ -74,6 +75,9 @@
     </Compile>
     <Compile Include="Views\SideBarView.xaml.cs">
       <DependentUpon>SideBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TagSelectionWindow.xaml.cs">
+      <DependentUpon>TagSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\BlurbEditWindow.xaml">
       <SubType>Designer</SubType>
@@ -97,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\SideBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TagSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

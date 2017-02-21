@@ -21,8 +21,8 @@
         <TextBox Text="{Binding Body , UpdateSourceTrigger=PropertyChanged}" Margin="5" Grid.Row="2"/>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <Button Content="Tags" Width="30" HorizontalAlignment="Left" Margin="5"/>
-            <TextBlock Text="{Binding TagListString , UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Tags" Command="{Binding OnOpenTagSelectionClick}" Width="30" HorizontalAlignment="Left" Margin="5"/>
+            <TextBlock Text="{Binding TagListString , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
         </StackPanel>
         <Button Grid.Row="3" Content="Close" Command="{Binding OnCloseClick}" CommandParameter="{Binding ElementName=BlurbEditWindowView}" Width="40" HorizontalAlignment="Right" Margin="5"/>
 
